@@ -174,6 +174,11 @@ SELECT SUM(liczba_godzin*kwota),stanowisko FROM firma.pracownicy AS prac
                                             JOIN firma.godziny AS godz ON godz.id_pracownika=wyn.id_pracownika 
                                             GROUP BY stanowisko;
 
+--8a
+UPDATE firma.pracownicy SET telefon = '+(48)' || telefon;
+
+--8b
+UPDATE firma.pracownicy SET telefon = CONCAT(LEFT(telefon, 5), ' ', SUBSTRING(telefon, 6, 3), '-', SUBSTRING(telefon, 9, 3), '-', RIGHT(telefon, 3));
 --8c
 SELECT UPPER(imie), UPPER(nazwisko) FROM firma.pracownicy 
                                     WHERE (LENGTH(pracownicy.nazwisko))=(SELECT MAX(LENGTH(pracownicy.nazwisko)) 
